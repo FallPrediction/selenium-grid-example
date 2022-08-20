@@ -9,6 +9,8 @@ services:
       - SE_EVENT_BUS_HOST=selenium-hub
       - SE_EVENT_BUS_PUBLISH_PORT=4442
       - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+    ports:
+      - 7900:7900
 
   edge:
     image: selenium/node-edge:latest
@@ -19,6 +21,8 @@ services:
       - SE_EVENT_BUS_HOST=selenium-hub
       - SE_EVENT_BUS_PUBLISH_PORT=4442
       - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+    ports:
+      - 7901:7900
 
   firefox:
     image: selenium/node-firefox:latest
@@ -29,6 +33,8 @@ services:
       - SE_EVENT_BUS_HOST=selenium-hub
       - SE_EVENT_BUS_PUBLISH_PORT=4442
       - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+    ports:
+      - 7902:7900
 
   selenium-hub:
     image: selenium/hub:latest
