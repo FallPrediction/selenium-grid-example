@@ -4,9 +4,22 @@ from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 
 
-@pytest.fixture(scope="module")
-def driver():
-    driver = webdriver.Chrome()
+def create_options(browser_name):
+    if browser_name == 'firefox':
+        options = webdriver.FirefoxOptions()
+    elif browser_name == 'edge':
+        options = webdriver.EdgeOptions()
+    else:
+        options = webdriver.ChromeOptions()
+    return options
+
+
+@pytest.fixture(scope="module", params=['chrome', 'edge', 'firefox'])
+def driver(request):
+    driver = webdriver.Remote(
+        command_executor='http://localhost:4444',
+        options=create_options(request.param)
+    )
     driver.maximize_window()
     yield driver
     driver.quit()
